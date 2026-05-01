@@ -1,7 +1,9 @@
 import { Phone, Mail } from "lucide-react";
 import { TacticalButton } from "./TacticalButton";
+import { useOrder } from "./OrderContext";
 
 export const CTA = () => {
+  const { open } = useOrder();
   return (
     <section id="contact" className="relative py-32 lg:py-40 overflow-hidden border-y border-border bg-panel/30">
       <div className="absolute inset-0 tactical-grid opacity-30" />
@@ -21,10 +23,10 @@ export const CTA = () => {
           Відповідаємо протягом доби.
         </p>
         <div className="flex flex-wrap gap-4 justify-center pt-4">
-          <TacticalButton variant="primary">
+          <TacticalButton variant="primary" onClick={() => open("call")}>
             <Phone className="w-4 h-4" /> Зателефонувати
           </TacticalButton>
-          <TacticalButton variant="outline">
+          <TacticalButton variant="outline" onClick={() => open("info")}>
             <Mail className="w-4 h-4" /> Написати нам
           </TacticalButton>
         </div>

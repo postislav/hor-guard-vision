@@ -148,4 +148,8 @@
     height: 1px;
     background: hsl(var(--gold));
   }
+
+  .field-input {
+    @apply w-full bg-background ring-1 ring-inset ring-border focus:ring-gold focus:outline-none px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/60 transition-all clip-tactical-sm;
+  }
 }

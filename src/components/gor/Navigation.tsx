@@ -1,4 +1,5 @@
 import { TacticalButton } from "./TacticalButton";
+import { useOrder } from "./OrderContext";
 
 const links = [
   { href: "#about", label: "Про систему" },
@@ -9,10 +10,15 @@ const links = [
 ];
 
 export const Navigation = () => {
+  const { open } = useOrder();
+  const scrollTop = (e: React.MouseEvent) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
   return (
     <header className="fixed top-0 inset-x-0 z-50 border-b border-border/60 bg-background/85 backdrop-blur-md">
       <div className="container flex items-center justify-between h-16">
-        <a href="#" className="flex items-center gap-3">
+        <a href="#" onClick={scrollTop} className="flex items-center gap-3">
           <div className="relative w-8 h-8 grid place-items-center bg-gold text-primary-foreground clip-tactical-sm">
             <span className="font-display text-lg leading-none">Г</span>
           </div>
@@ -33,7 +39,9 @@ export const Navigation = () => {
           ))}
         </nav>
 
-        <TacticalButton className="hidden md:inline-flex !py-2.5 !px-5">Замовити</TacticalButton>
+        <TacticalButton onClick={() => open("order")} className="hidden md:inline-flex !py-2.5 !px-5">
+          Замовити
+        </TacticalButton>
       </div>
     </header>
   );

@@ -8,6 +8,7 @@ import { Specs } from "@/components/gor/Specs";
 import { Steps } from "@/components/gor/Steps";
 import { CTA } from "@/components/gor/CTA";
 import { Footer } from "@/components/gor/Footer";
+import { OrderProvider } from "@/components/gor/OrderContext";
 import { useEffect } from "react";
 
 const Index = () => {
@@ -24,18 +25,20 @@ const Index = () => {
   }, []);
 
   return (
-    <main className="min-h-screen bg-background text-foreground tactical-noise">
-      <Navigation />
-      <Hero />
-      <StatsBar />
-      <About />
-      <Features />
-      <Kit />
-      <Specs />
-      <Steps />
-      <CTA />
-      <Footer />
-    </main>
+    <OrderProvider>
+      <main className="min-h-screen bg-background text-foreground tactical-noise">
+        <Navigation />
+        <Hero />
+        <StatsBar />
+        <About />
+        <Features />
+        <Kit />
+        <Specs />
+        <Steps />
+        <CTA />
+        <Footer />
+      </main>
+    </OrderProvider>
   );
 };
 
