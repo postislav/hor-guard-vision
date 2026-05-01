@@ -1,8 +1,13 @@
 import heroCase from "@/assets/hero-case.png";
 import { TacticalButton } from "./TacticalButton";
 import { ArrowRight } from "lucide-react";
+import { useOrder } from "./OrderContext";
 
 export const Hero = () => {
+  const { open } = useOrder();
+  const scrollToFeatures = () => {
+    document.getElementById("features")?.scrollIntoView({ behavior: "smooth" });
+  };
   return (
     <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden">
       <div className="absolute inset-0 tactical-grid opacity-30 [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]" />
@@ -27,10 +32,12 @@ export const Hero = () => {
           </p>
 
           <div className="flex flex-wrap gap-4 pt-2">
-            <TacticalButton variant="primary">
+            <TacticalButton variant="primary" onClick={() => open("order")}>
               Замовити <ArrowRight className="w-4 h-4" />
             </TacticalButton>
-            <TacticalButton variant="outline">Детальніше</TacticalButton>
+            <TacticalButton variant="outline" onClick={scrollToFeatures}>
+              Детальніше
+            </TacticalButton>
           </div>
 
           <div className="flex items-center gap-6 pt-6 font-mono text-[10px] uppercase tracking-[0.25em] text-muted-foreground">
