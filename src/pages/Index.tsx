@@ -1,16 +1,42 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { Navigation } from "@/components/gor/Navigation";
+import { Hero } from "@/components/gor/Hero";
+import { StatsBar } from "@/components/gor/StatsBar";
+import { About } from "@/components/gor/About";
+import { Features } from "@/components/gor/Features";
+import { Kit } from "@/components/gor/Kit";
+import { Specs } from "@/components/gor/Specs";
+import { Steps } from "@/components/gor/Steps";
+import { CTA } from "@/components/gor/CTA";
+import { Footer } from "@/components/gor/Footer";
+import { useEffect } from "react";
 
-// IMPORTANT: Fully REPLACE this with your own code
-const PlaceholderIndex = () => {
-  // PLACEHOLDER: Replace this entire return statement with the user's app.
-  // The inline background color is intentionally not part of the design system.
+const Index = () => {
+  useEffect(() => {
+    document.title = "ГОР-1 — Мобільна система периметрального відеоспостереження";
+    const meta =
+      document.querySelector('meta[name="description"]') ||
+      Object.assign(document.createElement("meta"), { name: "description" });
+    meta.setAttribute(
+      "content",
+      "ГОР-1 — портативна система спостереження 360° у захищеному кейсі. 4 камери, 100м кабелю, IP67. Розгортання за 3–5 хвилин."
+    );
+    if (!meta.parentNode) document.head.appendChild(meta);
+  }, []);
+
   return (
-    <div className="flex min-h-screen items-center justify-center" style={{ backgroundColor: '#fcfbf8' }}>
-      <img data-lovable-blank-page-placeholder="REMOVE_THIS" src="/placeholder.svg" alt="Your app will live here!" />
-    </div>
+    <main className="min-h-screen bg-background text-foreground tactical-noise">
+      <Navigation />
+      <Hero />
+      <StatsBar />
+      <About />
+      <Features />
+      <Kit />
+      <Specs />
+      <Steps />
+      <CTA />
+      <Footer />
+    </main>
   );
 };
-
-const Index = PlaceholderIndex;
 
 export default Index;
