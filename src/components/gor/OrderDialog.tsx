@@ -1,7 +1,7 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { useState } from "react";
 import { TacticalButton } from "./TacticalButton";
-import { Phone, Mail, User, MessageSquare, CheckCircle2, Hash } from "lucide-react";
+import { Phone, User, CheckCircle2 } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 
 type Mode = "order" | "call" | "info";
@@ -34,22 +34,42 @@ export const OrderDialog = ({ open, onOpenChange, mode }: Props) => {
   const cfg = titles[mode];
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [form, setForm] = useState({ name: "", phone: "", unit: "", qty: "1", message: "" });
+  const [form, setForm] = useState({ name: "", phone: "" });
 
-  const update = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+  const update = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement>) =>
     setForm((f) => ({ ...f, [k]: e.target.value }));
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      setSubmitted(true);
-      toast({
-        title: "Запит прийнято",
-        description: "Менеджер ГОР-1 зв'яжеться з вами найближчим часом.",
+
+    try {
+      const res = await fetch("https://stormix.com.ua/send.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...form, mode }),
       });
-    }, 700);
+
+      const data = await res.json();
+
+      if (data.ok) {
+        setSubmitted(true);
+        toast({
+          title: "Запит прийнято",
+          description: "Менеджер ГОР-1 зв'яжеться з вами найближчим часом.",
+        });
+      } else {
+        throw new Error(data.error || "Помилка сервера");
+      }
+    } catch (err) {
+      toast({
+        title: "Помилка відправки",
+        description: "Спробуйте ще раз або зателефонуйте нам напряму.",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleClose = (v: boolean) => {
@@ -57,7 +77,7 @@ export const OrderDialog = ({ open, onOpenChange, mode }: Props) => {
     if (!v) {
       setTimeout(() => {
         setSubmitted(false);
-        setForm({ name: "", phone: "", unit: "", qty: "1", message: "" });
+        setForm({ name: "", phone: "" });
       }, 200);
     }
   };
@@ -121,38 +141,6 @@ export const OrderDialog = ({ open, onOpenChange, mode }: Props) => {
                     onChange={update("phone")}
                     placeholder="+380"
                     className="field-input"
-                  />
-                </Field>
-
-                {mode === "order" && (
-                  <div className="grid grid-cols-2 gap-4">
-                    <Field icon={Mail} label="Підрозділ">
-                      <input
-                        value={form.unit}
-                        onChange={update("unit")}
-                        placeholder="в/ч або позивний"
-                        className="field-input"
-                      />
-                    </Field>
-                    <Field icon={Hash} label="Кількість">
-                      <input
-                        type="number"
-                        min={1}
-                        value={form.qty}
-                        onChange={update("qty")}
-                        className="field-input"
-                      />
-                    </Field>
-                  </div>
-                )}
-
-                <Field icon={MessageSquare} label="Повідомлення">
-                  <textarea
-                    rows={3}
-                    value={form.message}
-                    onChange={update("message")}
-                    placeholder="Уточнення, терміни, доставка..."
-                    className="field-input resize-none"
                   />
                 </Field>
 
