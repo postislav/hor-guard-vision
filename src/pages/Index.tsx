@@ -31,12 +31,12 @@ const Index = () => {
         <Navigation />
         <Hero />
         <StatsBar />
+        <Gallery />
         <About />
         <Features />
         <Kit />
         <Specs />
         <Steps />
-        <Gallery />
         <CTA />
         <Footer />
       </main>
