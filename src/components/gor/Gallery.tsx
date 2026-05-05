@@ -3,13 +3,11 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 import g1 from "@/assets/gallery-1.jpg";
 import g2 from "@/assets/gallery-2.jpg";
 import g3 from "@/assets/gallery-3.jpg";
-import g4 from "@/assets/gallery-4.jpg";
 
 const photos = [
-  { src: g1, caption: "Кейс у розгорнутому стані", tag: "IMG / 01" },
-  { src: g2, caption: "Камера на позиції", tag: "IMG / 02" },
-  { src: g3, caption: "Багатоканальний моніторинг", tag: "IMG / 03" },
-  { src: g4, caption: "Кабельна частина комплекту", tag: "IMG / 04" },
+  { src: g1, caption: "Комплект із кабелями", tag: "IMG / 01" },
+  { src: g2, caption: "Кейс із монітором та камерами", tag: "IMG / 02" },
+  { src: g3, caption: "Камера крупним планом", tag: "IMG / 03" },
 ];
 
 export const Gallery = () => {
@@ -28,7 +26,7 @@ export const Gallery = () => {
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {photos.map((p, i) => (
             <button
               type="button"
