@@ -17,7 +17,7 @@ export const Gallery = () => {
     <section id="gallery" className="py-24 lg:py-32 border-t border-border">
       <div className="container">
         <div className="max-w-3xl mb-16 space-y-6">
-          <div className="label-tag">// 05 — Галерея</div>
+          <div className="label-tag">// Галерея</div>
           <h2 className="font-display text-4xl md:text-5xl lg:text-6xl uppercase leading-[0.95]">
             Система <span className="text-gold">в роботі</span>
           </h2>
