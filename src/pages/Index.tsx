@@ -7,7 +7,6 @@ import { Kit } from "@/components/gor/Kit";
 import { Specs } from "@/components/gor/Specs";
 import { Steps } from "@/components/gor/Steps";
 import { Gallery } from "@/components/gor/Gallery";
-import { Video } from "@/components/gor/Video";
 import { CTA } from "@/components/gor/CTA";
 import { Footer } from "@/components/gor/Footer";
 import { OrderProvider } from "@/components/gor/OrderContext";
@@ -38,7 +37,6 @@ const Index = () => {
         <Specs />
         <Steps />
         <Gallery />
-        <Video youtubeUrl="https://www.youtube.com/watch?v=dQw4w9WgXcQ" />
         <CTA />
         <Footer />
       </main>
